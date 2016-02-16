@@ -30,7 +30,7 @@ Posts.belongsToMany(Users, {through: Votes});
 
 
 
-Users.create({email: 'sonia@sonia.com', screen_name: 'Soso', password: 'abcdef'}).then(function(user){
+/*Users.create({email: 'sonia@sonia.com', screen_name: 'Soso', password: 'abcdef'}).then(function(user){
         user.createPost({
             url: 'test',
             title: 'testerferferfer'
@@ -42,12 +42,12 @@ Users.create({email: 'sonia@sonia.com', screen_name: 'Soso', password: 'abcdef'}
             url: 'http://www.decodemtl.com',
             title: 'Student at DecodeMTL'
         })
-})
+})*/
 
 
-function createNewUser (username, password, callback){
+function createNewUser (screen_name, password, callback){
     return Users.create({
-        username: username,
+        screen_name: screen_name,
         password: password
     }).then(function(user){
         if (typeof callback === 'function') {
@@ -57,8 +57,9 @@ function createNewUser (username, password, callback){
 }
 createNewUser('robert', 'password', function(newguy){console.log(JSON.stringify(newguy, 0 , 2))});
 
+
 function createNewContent (userID, url, title, callback){
-    Users.findById.then(function(user){
+    Users.findById(1).then(function(user){
         user.createPost({
         url: url,
         title: title
